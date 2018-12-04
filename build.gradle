@@ -1,0 +1,16 @@
+group 'com.githang'
+version '1.0-SNAPSHOT'
+
+subprojects {
+    buildscript {
+        repositories {
+            jcenter()
+            mavenCentral()
+        }
+    }
+
+    repositories {
+        jcenter()
+        mavenCentral()
+    }
+}
