@@ -6,6 +6,8 @@ import com.githang.hunar.kindle.sender.BookSender
 import com.githang.hunar.kindle.support.PreferenceCache
 import com.github.yoojia.web.server.EmbeddedServer
 import org.slf4j.LoggerFactory
+import java.util.*
+import java.util.concurrent.TimeUnit
 
 /**
  * @author haohang (msdx.android@qq.com)
@@ -18,7 +20,11 @@ object KindleLauncher {
     @JvmStatic
     fun main(args: Array<String>) {
         val bookScanner = BookScanner()
-        bookScanner.startScan(PreferenceCache.bookDir)
+        Timer().schedule(object : TimerTask() {
+            override fun run() {
+                bookScanner.startScan(PreferenceCache.bookDir)
+            }
+        }, 0, TimeUnit.DAYS.toMillis(1))
 
         val server = EmbeddedServer(8117)
         server.setBootstrapServlet(ApiServlet::class.java)

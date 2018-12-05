@@ -67,6 +67,7 @@ class BookService {
         val sendBook = SendBook(book.name, book.path, email)
         session.save(sendBook)
         BookSender.notifyToSend()
+        PreferenceCache.sendLimit = PreferenceCache.sendLimit - 1
         resp.success()
     }
 

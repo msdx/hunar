@@ -31,7 +31,7 @@ object PreferenceCache {
             override fun run() {
                 prefs.setProperty("limit", 100)
             }
-        }, calendar.time, TimeUnit.DAYS.toSeconds(1))
+        }, calendar.time, TimeUnit.DAYS.toMillis(1))
     }
 
     var scanTime: Long
