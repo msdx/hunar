@@ -2,6 +2,8 @@ package com.githang.hunar.kindle.support
 
 import org.apache.commons.configuration.PropertiesConfiguration
 import java.io.File
+import java.util.*
+import java.util.concurrent.TimeUnit
 
 /**
  * @author haohang (msdx.android@qq.com)
@@ -18,6 +20,16 @@ object PreferenceCache {
         }
         prefs = PropertiesConfiguration(file)
         prefs.isAutoSave = true
+
+        val calendar = Calendar.getInstance()
+        calendar.set(Calendar.HOUR_OF_DAY, 0)
+        calendar.set(Calendar.MINUTE, 0)
+        calendar.set(Calendar.SECOND, 0)
+        Timer().schedule(object : TimerTask() {
+            override fun run() {
+                prefs.setProperty("limit", 100)
+            }
+        }, calendar.time, TimeUnit.DAYS.toSeconds(1))
     }
 
     var scanTime: Long
