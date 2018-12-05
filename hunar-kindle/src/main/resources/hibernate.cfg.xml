@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC
+        "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+
+<hibernate-configuration>
+    <session-factory>
+        <!--驱动路径注意数据库类型  -->
+        <property name="connection.driver_class">com.mysql.cj.jdbc.Driver</property>
+        <!--数据库路径  -->
+        <property name="connection.url">jdbc:mysql://localhost:3306/kindle</property>
+        <!--中文乱码-->
+        <property name="connection.useUnicode">true</property>
+        <property name="connection.characterEncoding">UTF-8</property>
+        <!--数据库用户名  -->
+        <property name="connection.username">root</property>
+        <!--数据库密码  -->
+        <property name="connection.password"></property>
+        <!--方言，便于hibernate对象操作转化为合适的数据库语句  -->
+        <property name="dialect">org.hibernate.dialect.MySQL5Dialect</property>
+        <!--是否显示sql语句，sql一般会很难看  默认为false-->
+        <property name="hibernate.show_sql">false</property>
+        <!--自动生成或更新表-->
+        <property name="hbm2ddl.auto">update</property>
+        <!--下一个层级的映射文件，用来配置bean对象与数据表之间的关系  -->
+        <mapping class="com.githang.hunar.kindle.entity.Book"/>
+    </session-factory>
+</hibernate-configuration>

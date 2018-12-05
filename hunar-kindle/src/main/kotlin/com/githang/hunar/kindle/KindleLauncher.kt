@@ -1,6 +1,7 @@
 package com.githang.hunar.kindle
 
 import com.githang.hunar.kindle.api.ApiServlet
+import com.githang.hunar.kindle.scanner.BookScanner
 import com.github.yoojia.web.server.EmbeddedServer
 import org.slf4j.LoggerFactory
 
@@ -14,6 +15,9 @@ object KindleLauncher {
 
     @JvmStatic
     fun main(args: Array<String>) {
+        val bookScanner = BookScanner(KindleConfig.get(KindleConfig.BOOKS_DIR))
+        bookScanner.start()
+
         val server = EmbeddedServer(8117)
         server.setBootstrapServlet(ApiServlet::class.java)
         server.start()

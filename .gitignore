@@ -85,3 +85,4 @@ gradle-app.setting
 hunar-kindle.properties
 
 .attach*
+*.pref
