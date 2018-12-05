@@ -9,5 +9,8 @@ import org.hibernate.cfg.Configuration
  * @since 2018-12-04
  */
 object OrmUtil {
-    val session: Session by lazy { Configuration().configure().buildSessionFactory().openSession() }
+    private val sessionFactory by lazy { Configuration().configure().buildSessionFactory() }
+    val session: Session by lazy { sessionFactory.openSession() }
+
+    fun openSession() = sessionFactory.openSession()
 }

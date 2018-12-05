@@ -24,5 +24,7 @@
         <property name="hbm2ddl.auto">update</property>
         <!--下一个层级的映射文件，用来配置bean对象与数据表之间的关系  -->
         <mapping class="com.githang.hunar.kindle.entity.Book"/>
+        <mapping class="com.githang.hunar.kindle.entity.SendBook"/>
+        <mapping class="com.githang.hunar.kindle.entity.SendRecord"/>
     </session-factory>
 </hibernate-configuration>

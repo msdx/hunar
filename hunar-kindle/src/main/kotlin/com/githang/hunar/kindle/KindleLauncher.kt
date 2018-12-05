@@ -2,6 +2,7 @@ package com.githang.hunar.kindle
 
 import com.githang.hunar.kindle.api.ApiServlet
 import com.githang.hunar.kindle.scanner.BookScanner
+import com.githang.hunar.kindle.sender.BookSender
 import com.github.yoojia.web.server.EmbeddedServer
 import org.slf4j.LoggerFactory
 
@@ -22,5 +23,6 @@ object KindleLauncher {
         server.setBootstrapServlet(ApiServlet::class.java)
         server.start()
         log.info("Kindle service started")
+        BookSender.notifyToSend()
     }
 }
