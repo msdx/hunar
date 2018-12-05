@@ -11,24 +11,31 @@ import javax.persistence.*
 @Entity
 @SQLInsert(sql = "REPLACE INTO t_book(file_size, name, path, type, update_time) VALUES (?, ?, ?, ?, ?)")
 @Table(name = "t_book")
-class Book(
+class Book {
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    val id: Int = 0,
+    var id: Int = 0
     @Column(name = "name", unique = true)
-    val name: String,
+    var name: String? = null
     @Column(name = "type")
-    val type: String,
+    var type: String? = null
     @Column(name = "path")
-    val path: String,
+    var path: String? = null
     @Column(name = "file_size")
-    val fileSize: Long,
+    var fileSize: Long? = null
     @Column(name = "update_time")
-    val updateTime: Long
-) {
-    constructor(name: String, type: String, path: String, fileSize: Long, updateTime: Long)
-            : this(0, name, type, path, fileSize, updateTime)
+    var updateTime: Long? = null
+
+    constructor()
+
+    constructor(name: String, type: String, path: String, fileSize: Long, updateTime: Long) {
+        this.name = name
+        this.type = type
+        this.path = path
+        this.fileSize = fileSize
+        this.updateTime = updateTime
+    }
 
     override fun toString(): String {
         return "Book(name='$name', type='$type', path='$path', fileSize=$fileSize, updateTime=$updateTime, id=$id)"

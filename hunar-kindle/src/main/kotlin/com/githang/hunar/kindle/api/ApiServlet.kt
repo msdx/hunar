@@ -1,5 +1,6 @@
 package com.githang.hunar.kindle.api
 
+import com.githang.hunar.kindle.api.service.BookService
 import com.githang.hunar.kindle.api.service.ConfigService
 import com.github.yoojia.web.Context
 import com.github.yoojia.web.ProvidedServlet
@@ -11,6 +12,9 @@ import com.github.yoojia.web.ProvidedServlet
  */
 class ApiServlet : ProvidedServlet() {
     override fun getClasses(context: Context): List<Class<*>> {
-        return from(ConfigService::class.java)
+        return from(
+            ConfigService::class.java,
+            BookService::class.java
+        )
     }
 }

@@ -10,13 +10,13 @@ import com.github.yoojia.web.Response
  * @since 2018-12-03
  */
 fun Response.success() {
-    this.writeTextSilently(Json.toJson(BaseResponse()))
+    this.json(Json.toJson(BaseResponse()))
 }
 
 fun <T> Response.success(data: T) {
-    this.writeTextSilently(Json.toJson(DataResponse(data)))
+    this.json(Json.toJson(DataResponse(data)))
 }
 
 fun Response.failed(code: Int, msg: String) {
-    this.writeTextSilently(Json.toJson(BaseResponse(code, msg)))
+    this.json(Json.toJson(BaseResponse(code, msg)))
 }
