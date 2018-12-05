@@ -5,6 +5,7 @@ import com.githang.hunar.kindle.api.failed
 import com.githang.hunar.kindle.api.success
 import com.githang.hunar.kindle.entity.Book
 import com.githang.hunar.kindle.entity.SendBook
+import com.githang.hunar.kindle.entity.SendRecord
 import com.githang.hunar.kindle.sender.BookSender
 import com.githang.hunar.kindle.support.OrmUtil
 import com.githang.hunar.kindle.support.PreferenceCache
@@ -67,6 +68,22 @@ class BookService {
         session.save(sendBook)
         BookSender.notifyToSend()
         resp.success()
+    }
+
+    @GET("/sent_records")
+    fun sendRecords(req: Request, resp: Response) {
+        val session = OrmUtil.openSession()
+        val email = req.paramAsString("email")
+        val query = if (email.isEmpty()) {
+            session.createQuery("from SendRecord order by id desc", SendRecord::class.java)
+        } else {
+            session.createQuery("from SendRecord where email = ?1 order by id desc", SendRecord::class.java)
+                .setParameter(1, email)
+        }
+        query.firstResult = 0
+        query.maxResults = 100
+        resp.success(query.list())
+        session.close()
     }
 
     companion object {
