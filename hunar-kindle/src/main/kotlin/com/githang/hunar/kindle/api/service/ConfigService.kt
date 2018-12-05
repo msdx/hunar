@@ -1,6 +1,6 @@
 package com.githang.hunar.kindle.api.service
 
-import com.githang.hunar.kindle.KindleConfig
+import com.githang.hunar.kindle.support.KindleConfig
 import com.githang.hunar.kindle.api.success
 import com.githang.hunar.kindle.support.PreferenceCache
 import com.github.yoojia.web.Response

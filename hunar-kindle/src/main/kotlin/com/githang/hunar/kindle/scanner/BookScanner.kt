@@ -1,6 +1,5 @@
 package com.githang.hunar.kindle.scanner
 
-import com.githang.hunar.kindle.KindleConfig
 import com.githang.hunar.kindle.entity.Book
 import com.githang.hunar.kindle.support.OrmUtil
 import com.githang.hunar.kindle.support.PreferenceCache
@@ -14,25 +13,24 @@ import kotlin.concurrent.thread
  * @version 2018-12-04
  * @since 2018-12-04
  */
-class BookScanner(dir: String) {
+class BookScanner {
 
-    private val booksDir: File = File(dir)
     private var count = 0
     private var isStarted = false
 
     private val session by lazy { OrmUtil.session }
     private var lastScanTime: Long = 0
 
-    init {
-        if (dir.isEmpty()) {
-            throw IllegalArgumentException("Please config [${KindleConfig.BOOKS_DIR}] on hunar-kindle.properties")
+    fun startScan(dir: String?) {
+        log.info("Kindle books dir: $dir")
+        if (dir == null || dir.isEmpty()) {
+            throw IllegalArgumentException("Please configure [books_dir] on ${PreferenceCache.CACHE_FILE_NAME}")
         }
+        val booksDir = File(dir)
         if (!booksDir.exists() || !booksDir.isDirectory) {
             log.error("The books dir $dir is not exists or is not a directory")
+            return
         }
-    }
-
-    fun start() {
         if (isStarted) {
             log.warn("Book scanner is started")
             return
@@ -56,7 +54,7 @@ class BookScanner(dir: String) {
     }
 
     private fun scanAndUpdate(file: File, session: Session) {
-        file.listFiles { _, s -> !s.startsWith(".git")  && !s.endsWith(".md") }
+        file.listFiles { _, s -> !s.startsWith(".git") && !s.endsWith(".md") }
             .forEach {
                 if (it.isFile && it.lastModified() > lastScanTime) {
                     count++

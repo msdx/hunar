@@ -11,10 +11,12 @@ import java.util.concurrent.TimeUnit
  * @since 2018-12-04
  */
 object PreferenceCache {
+    const val CACHE_FILE_NAME = "hunar-kindle.pref"
+
     private val prefs: PropertiesConfiguration
 
     init {
-        val file = File("hunar-kindle.pref")
+        val file = File(CACHE_FILE_NAME)
         if (!file.exists()) {
             file.createNewFile()
         }
@@ -41,4 +43,7 @@ object PreferenceCache {
     var sendLimit: Int
         get() = prefs.getInt("limit", 100)
         set(value) = prefs.setProperty("limit", value)
+
+    val bookDir: String
+        get() = prefs.getString("books_dir", "")
 }

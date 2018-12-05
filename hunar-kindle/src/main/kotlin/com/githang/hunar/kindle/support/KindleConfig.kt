@@ -1,4 +1,4 @@
-package com.githang.hunar.kindle
+package com.githang.hunar.kindle.support
 
 import java.util.*
 
@@ -12,8 +12,6 @@ object KindleConfig {
     const val MAILER_SMTP_PASSWORD = "mailer.smtp-password"
     const val MAILER_SMTP_HOST ="mailer.smtp-host"
     const val MAILER_SMTP_PORT = "mailer.smtp-port"
-
-    const val BOOKS_DIR = "books.dir"
 
     private val properties by lazy {
       Properties().apply {

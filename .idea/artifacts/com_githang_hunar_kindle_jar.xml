@@ -1,0 +1,13 @@
+<component name="ArtifactManager">
+  <artifact type="jar" build-on-make="true" name="com.githang.hunar-kindle:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/com_githang_hunar_kindle_jar</output-path>
+    <root id="archive" name="com.githang.hunar-kindle_jar.jar">
+      <element id="archive" name="com.githang.hunar-kindle.jar">
+        <element id="directory" name="META-INF">
+          <element id="file-copy" path="$PROJECT_DIR$/META-INF/MANIFEST.MF" />
+          <element id="module-output" name="com.githang.hunar-kindle.main" />
+        </element>
+      </element>
+    </root>
+  </artifact>
+</component>

@@ -1,6 +1,6 @@
 package com.githang.hunar.kindle.sender
 
-import com.githang.hunar.kindle.KindleConfig
+import com.githang.hunar.kindle.support.KindleConfig
 import com.githang.hunar.kindle.entity.SendBook
 import com.githang.hunar.kindle.entity.SendRecord
 import com.githang.hunar.kindle.support.OrmUtil
