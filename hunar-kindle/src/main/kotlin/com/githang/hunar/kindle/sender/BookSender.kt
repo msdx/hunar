@@ -49,7 +49,12 @@ object BookSender {
             query.maxResults = 1
             val sendBook = query.list().firstOrNull() ?: break
             try {
-                sendEmail(sendBook)
+                val file = File(sendBook.path)
+                if (file.isDirectory || !file.exists()) {
+                    updateRecord(sendBook, false, "图书不存在")
+                    continue
+                }
+                sendEmail(sendBook, file)
                 updateRecord(sendBook, true)
             } catch (e: Exception) {
                 e.printStackTrace()
@@ -70,7 +75,7 @@ object BookSender {
         session.close()
     }
 
-    private fun sendEmail(record: SendBook) {
+    private fun sendEmail(record: SendBook, file: File) {
         log.info("Sending ${record.book} to ${record.email}")
         val session = Session.getDefaultInstance(properties, object : Authenticator() {
             override fun getPasswordAuthentication(): PasswordAuthentication {
@@ -83,7 +88,7 @@ object BookSender {
         msg.setSubject(record.book, "utf-8")
         val multipart = MimeMultipart("mixed")
         val attachBodyPart = MimeBodyPart()
-        attachBodyPart.attachFile(File(record.path))
+        attachBodyPart.attachFile(file)
         attachBodyPart.fileName = MimeUtility.encodeText(record.book)
         multipart.addBodyPart(attachBodyPart)
         msg.setContent(multipart)
