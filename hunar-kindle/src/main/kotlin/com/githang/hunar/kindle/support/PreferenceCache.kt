@@ -25,4 +25,8 @@ object PreferenceCache {
         set(value) {
             prefs.setProperty("scan-time", value)
         }
+
+    var sendLimit: Int
+        get() = prefs.getInt("limit", 100)
+        set(value) = prefs.setProperty("limit", value)
 }
